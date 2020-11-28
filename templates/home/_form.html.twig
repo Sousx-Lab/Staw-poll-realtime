@@ -1,0 +1,68 @@
+<div class="mt-4">
+	{{ form_start(form) }}
+	<div class="form-group row">
+		<div class="col-sm-6 mt-4">
+			{{ form_label(form.title, (form.title.vars.required ? '* ': '') ~ 'Question du sondage', {'attr': {'class': 'col-sm-2 col-form-label'}}) }}
+			{{ form_widget(form.title,
+                {'attr': {'autofocus':'true', 'class': 'form-control' ~ (form.title.vars.valid ? ' ' : ' is-invalid'), 
+                'placeholder': 'Dans la trilogie Matrix , lequel est votre préféré ?'}}) }}
+			{% if  true != form.title.vars.valid %}
+				{% for error in form.title.vars.errors %}
+					<div class="invalid-feedback">{{error.message}}</div>
+				{% endfor %}
+			{% endif %}
+		</div>
+	</div>
+	{% set response = form.pollResponse.vars.prototype %}
+	<div id="prototype" 
+				data-label="{{ form_label (response.content, 'Réponse :')|e}}" 
+					data-input="{{ form_widget (response.content, {'attr' : {class: 'form-control' ~ (form.pollResponse.vars.valid ? '': ' is-invalid') }})|e }}" 
+			>
+	</div>
+<div id="response-item">
+	<div class="form-group row" id="1">
+		<div class="col-sm-6">
+			<label for="poll_pollResponse_1_content">Réponse : 1</label>
+			<div class="input-group">
+				<input type="text" id="poll_pollResponse_1_content" name="poll[pollResponse][1][content]" class="form-control" placeholder="Autres résponse">
+				<div class="input-group-append">
+					<button type="button" class="btn btn-danger" name="remove_field">-</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="form-group row" id="2">
+		<div class="col-sm-6">
+			<label for="poll_pollResponse_2_content">Réponse : 2</label>
+			<div class="input-group">
+				<input type="text" id="poll_pollResponse_2_content" name="poll[pollResponse][2][content]" class="form-control" placeholder="Autres résponse">
+				<div class="input-group-append">
+					<button type="button" class="btn btn-danger" name="remove_field">-</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="form-group row" id="3">
+		<div class="col-sm-6">
+			<label for="poll_pollResponse_3_content">Réponse : 3</label>
+			<div class="input-group">
+				<input type="text" id="poll_pollResponse_3_content" name="poll[pollResponse][3][content]" class="form-control" placeholder="Autres résponse">
+				<div class="input-group-append">
+					<button type="button" class="btn btn-danger" name="remove_field">-</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="row mt-2">
+	<div class="col-lg-6">
+		<button type="submit" class="btn btn-success">Créer le sondage</button>
+		<button type="button" class="btn btn-primary" data-collection-holder-class="input-group" name="add_field">Ajouter un champ
+			<strong>+</strong>
+		</button>
+		<button type="reset" class="btn btn-danger float-right">Reset</button>
+	</div>
+</div>
+
+	{{ form_widget(form._token) }}
+	{{ form_end(form, {'render_rest': false}) }}</div>

@@ -1,0 +1,57 @@
+<legend class="mb-4">Créer un nouveau Sondage</legend>
+	<div class="form-check">
+		<label class="form-check-label">
+			<input type="radio" class="form-check-input" id="qcm" name="type_poll" id="optionsRadios2" value="qcm">
+			Sondage à choix multilples
+		</label>
+	</div>
+	<div class="form-check disabled">
+		<label class="form-check-label">
+			<input type="radio" class="form-check-input" id="yes_no" name="type_poll" id="optionsRadios3" value="yes_no">
+			Oui / Non
+		</label>
+	<div class="col-6">
+						<div class="mt-3">
+							<strong>{{responses.content}}</strong>
+							<div class="progress" style="height: 20px;">
+								<div class="progress-bar progress-bar-striped bg-success" role="progressbar" style="width: 28%;" aria-valuenow="{{responses.score}}" aria-valuemin="0" aria-valuemax="100">28%</div>
+							</div>
+						</div>
+					</div>
+{# {% for key, response in form.pollResponse %}
+			{% if key == 0 %}
+				{% set exemple = 'Matrix' %}
+
+			{% elseif key == 1 %}
+				{% set exemple = 'Matrix Reload' %}
+
+			{% elseif key == 2 %}
+				{% set exemple = 'Matrix Revolution' %}
+
+			{% else %}
+				{% set exemple = 'Autre response' %}
+			{% endif %}
+			<div class="form-group row">
+				<div class="col-sm-6">
+					{{ form_label(response.content, (response.content.vars.required ? '* ' : '') ~ 'Choix n° ' ~ (key + 1) )}}
+					<div class="input-group">
+						{{ form_widget(response.content, {'id': 'response' ~ (key) ,'attr': {'class': 'form-control' ~ (response.vars.valid ? '':  ' is-invalid'),
+                    'placeholder': "Exemple : " ~  (exemple) }}) }}
+						<div class="input-group-append">
+							<button type="button" class="btn btn-danger" id="remove_field">-</button>
+						</div>
+						{% if response.content.vars.errors %}
+							{% for error in response.content.vars.errors %}
+								<div class="invalid-feedback">{{error.message}}</div>
+							{% endfor %}
+						{% endif %}
+					</div>
+				</div>
+			</div>
+		{% endfor %} #}
+		{% set response = form.pollResponse.vars.prototype.content %}
+		<ul class="input-group" id="response_item" 
+				data-label ="{{ form_label (response, 'Choix n°') ~ (response.id)|e}}"
+				data-input="{{ form_widget (response, {'attr' : {class: 'form-control' ~ (form.pollResponse.vars.valid ? '':  ' is-invalid') }})|e }}"
+				>
+			</ul>
