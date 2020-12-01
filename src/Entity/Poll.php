@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\PollRepository;
 use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Serializer\Annotation\Groups;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -19,6 +20,7 @@ class Poll
      * @var \Ramsey\Uuid\UuidInterface
      * @ORM\Id
      * @ORM\Column(type="uuid", unique=true)
+     * @Groups("poll")
      */
     protected $id;
 
@@ -26,16 +28,19 @@ class Poll
      * @ORM\Column(type="string", length=255)
      * @Assert\NotBlank
      * @Assert\Length(min=2, minMessage="Au moin 2 caractère", max=100, maxMessage="Veuillez reformuler votre question, 100 caractère maximum")
+     * @Groups("poll")
      */
     private string $title;
 
     /**
      * @ORM\Column(type="datetime")
+     * @Groups("poll")
      */
     private \DateTime $createdAt;
 
     /**
      * @ORM\OneToMany(targetEntity=PollResponse::class, mappedBy="poll", orphanRemoval=true, cascade={"persist"})
+     * @Groups("poll")
      */
     private $pollResponse;
 
@@ -79,7 +84,7 @@ class Poll
     /**
      * @return Collection|PollResponse[]
      */
-    public function getPollResponse(): Collection
+    public function getPollResponse(): ?Collection
     {
         return $this->pollResponse;
     }

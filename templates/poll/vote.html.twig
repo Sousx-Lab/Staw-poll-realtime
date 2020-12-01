@@ -8,7 +8,7 @@
 	<div class="border border-secondary bg-dark text-white p-3 mt-3" id="vote">
 		<h2 class="display-5 text-center">{{poll.title}}</h2>
 		<hr class="my-4">
-		<form id="poll_form" method="POST">
+		<form id="{{poll.id}}" method="POST">
 			<fieldset class="form-group">
 				<legend>Résponses du sondage :</legend>
 				{% for responses in poll.pollResponse %}
@@ -20,9 +20,9 @@
 					</div>
 				{% endfor %}
 			</fieldset>
-			{# <input type="hidden" name="token" value="{{ csrf_token ('poll_voting') }}"/> #}
+			<input type="hidden" name="token" value="{{ csrf_token ("poll_responses") }}"/>
 			<div class="mt-3 text-center">
-				<button class="btn btn-success" type="submit" data-id="{{poll.id}}"  data-token="{{ csrf_token (poll.id)}}">Votez</button>
+				<button class="btn btn-success" type="submit">Votez</button>
 			</div>
 		</form>
 	</div>
