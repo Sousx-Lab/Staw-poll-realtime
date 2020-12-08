@@ -24,10 +24,10 @@
 		<div class="col-sm-6">
 			<label for="poll_pollResponse_1_content">Réponse : 1</label>
 			<div class="input-group">
-				<input type="text" id="poll_pollResponse_1_content" name="poll[pollResponse][1][content]" class="form-control" placeholder="Autres résponse">
-				<div class="input-group-append">
+				<input type="text" id="poll_pollResponse_1_content" name="poll[pollResponse][1][content]" class="form-control" placeholder="Matrix">
+				{# <div class="input-group-append">
 					<button type="button" class="btn btn-danger" name="remove_field">-</button>
-				</div>
+				</div> #}
 			</div>
 		</div>
 	</div>
@@ -35,10 +35,10 @@
 		<div class="col-sm-6">
 			<label for="poll_pollResponse_2_content">Réponse : 2</label>
 			<div class="input-group">
-				<input type="text" id="poll_pollResponse_2_content" name="poll[pollResponse][2][content]" class="form-control" placeholder="Autres résponse">
-				<div class="input-group-append">
+				<input type="text" id="poll_pollResponse_2_content" name="poll[pollResponse][2][content]" class="form-control" placeholder="Matrix Reload">
+				{# <div class="input-group-append">
 					<button type="button" class="btn btn-danger" name="remove_field">-</button>
-				</div>
+				</div> #}
 			</div>
 		</div>
 	</div>
@@ -46,10 +46,10 @@
 		<div class="col-sm-6">
 			<label for="poll_pollResponse_3_content">Réponse : 3</label>
 			<div class="input-group">
-				<input type="text" id="poll_pollResponse_3_content" name="poll[pollResponse][3][content]" class="form-control" placeholder="Autres résponse">
-				<div class="input-group-append">
+				<input type="text" id="poll_pollResponse_3_content" name="poll[pollResponse][3][content]" class="form-control" placeholder="Matrix Revoltion">
+				{# <div class="input-group-append">
 					<button type="button" class="btn btn-danger" name="remove_field">-</button>
-				</div>
+				</div> #}
 			</div>
 		</div>
 	</div>
@@ -57,10 +57,11 @@
 <div class="row mt-2">
 	<div class="col-lg-6">
 		<button type="submit" class="btn btn-success">Créer le sondage</button>
-		<button type="button" class="btn btn-primary" data-collection-holder-class="input-group" name="add_field">Ajouter un champ
+		<button type="button" class="btn btn-info" data-collection-holder-class="input-group" name="add_field">Ajouter un champ
 			<strong>+</strong>
 		</button>
 		<button type="reset" class="btn btn-danger float-right">Reset</button>
+		<button type="button" class="btn btn-danger float-right" name="remove_field">Supprimer un champ</button>
 	</div>
 </div>
 

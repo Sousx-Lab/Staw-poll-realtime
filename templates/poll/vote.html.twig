@@ -6,7 +6,7 @@
 
 {% block body %}
 	<div class="border border-secondary bg-dark text-white p-3 mt-3" id="vote">
-		<h2 class="display-5 text-center">{{poll.title}}</h2>
+		<h2  id="poll_title" class="display-5 text-center">{{poll.title}}</h2>
 		<hr class="my-4">
 		<form id="{{poll.id}}" method="POST">
 			<fieldset class="form-group">
@@ -14,8 +14,8 @@
 				{% for responses in poll.pollResponse %}
 					<div class="form-check pt-3">
 						<label class="form-check-label">
-							<input type="radio" class="form-check-input" name="poll_responses" id="{{responses.id}}" value="{{responses.id}}" autocomplete="off">
-							{{responses.content}}
+							<input type="radio" class="form-check-input" name="poll_responses" data-content="{{responses.content}}" data-score="{{responses.score}}" id="{{responses.id}}" value="{{responses.id}}" autocomplete="off">
+								{{responses.content}}
 						</label>
 					</div>
 				{% endfor %}

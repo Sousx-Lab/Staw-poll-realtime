@@ -1,16 +1,15 @@
 import { Form } from './component/Form'
-import { handleFormVote } from './services/handleFormVote'
-import { uniqId } from './security/uniqId'
+import { handleVote } from './services/handleVote'
 
 const App = () => {
-    uniqId()  
+    
     if (document.getElementById('home')) {
         let items = document.getElementById('response-item')
         Form(items)
     }
 
-    if(document.getElementById('vote')){
-        handleFormVote()
+    if(document.getElementById('vote') && window.location.pathname.includes("/vote/")){
+        handleVote()
     }
 
 }
