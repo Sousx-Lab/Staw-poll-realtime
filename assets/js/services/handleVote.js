@@ -30,7 +30,7 @@ export function handleVote() {
             .then((response) => {
                 Object.assign(poll, response)
                 localStorage.set(pollId, formData.get('poll_responses'))
-                cookies.setCookie(pollId, formData.get('poll_responses'), 1)
+                cookies.setCookie(pollId, formData.get('poll_responses'), 5)
                 formElem.remove()
                 resultVote(poll)
             })
