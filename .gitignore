@@ -22,6 +22,6 @@ yarn-error.log
 ###< symfony/webpack-encore-bundle ###
 
 ###> symfony/mercure ###
-/update.db
+/updates.db
 ###< symfony/mercure###
 
