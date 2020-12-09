@@ -29,8 +29,8 @@ export function handleVote() {
             await requestApi.post(VOTE_URL, pollId, formData)
             .then((response) => {
                 Object.assign(poll, response)
-                // localStorage.set(pollId, formData.get('poll_responses'))
-                // cookies.setCookie(pollId, formData.get('poll_responses'), 5)
+                localStorage.set(pollId, formData.get('poll_responses'))
+                cookies.setCookie(pollId, formData.get('poll_responses'), 5)
                 formElem.remove()
                 resultVote(poll)
             })
