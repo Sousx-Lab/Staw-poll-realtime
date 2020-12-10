@@ -3,7 +3,7 @@ import { poll } from '../entity/poll'
 import { VOTE_URL } from './config'
 import localStorage from '../persistance/localStorage'
 import cookies from '../persistance/cookies'
-import { resultVote } from '../component/resultVote'
+import { progressBar } from '../component/progressBar'
 
 export function handleVote() {
     
@@ -19,7 +19,7 @@ export function handleVote() {
             
         })
         formElem.remove()
-        resultVote(poll)
+        progressBar(poll)
     }
     
     formElem.onsubmit = async function(e) {
@@ -32,7 +32,7 @@ export function handleVote() {
                 localStorage.set(pollId, formData.get('poll_responses'))
                 cookies.setCookie(pollId, formData.get('poll_responses'), 5)
                 formElem.remove()
-                resultVote(poll)
+                progressBar(poll)
             })
         } catch (error) {
             throw new Error(error)

@@ -1,21 +1,12 @@
 import { mercureSubscriber} from '../services/mercure'
-let totalVote = 0
 
-export function resultVote(poll) {
-
-    function getTotalVote(){
-        totalVote = 0
-        poll.pollResponse.forEach(e => {
-            totalVote += parseInt(e.score, 10)
-        })
-    }
+export function progressBar(poll) {
     
-    function buildResult() {
+    function buildHtml() {
         let vote = document.getElementById('vote')
-        getTotalVote() 
-        vote.insertAdjacentHTML('beforeend', `<h5 id="${poll.id}" class="text-center">Totale vote ${totalVote}</h5>`) 
+        vote.insertAdjacentHTML('beforeend', `<h5 id="${poll.id}" class="text-center">Totale vote ${poll.totalVote()}</h5>`) 
         poll.pollResponse.forEach(e => {
-            let score = Math.round(e.score * 100 / totalVote)
+            let score = Math.round(e.score * 100 / poll.totalVote())
             vote.insertAdjacentHTML('beforeend',
                 `<div class="d-flex justify-content-center text-center mb-5">
                   <div class="col-6 mt-3">
@@ -29,14 +20,15 @@ export function resultVote(poll) {
             `
         )});
     }
+
     /** 
      * @param {object} poll
      */
     function updateView(poll){
-        getTotalVote()
         document.getElementById(poll.id).innerText = `Totale vote ${totalVote}`
+
         poll.pollResponse.forEach(e => {
-            let score = Math.round(e.score * 100 / totalVote)
+            let score = Math.round(e.score * 100 / poll.totalVote())
             let divId = document.getElementById(e.id)
             divId.style.width = score + "%"
             divId.setAttribute('aria-valuenow', score)
@@ -45,7 +37,7 @@ export function resultVote(poll) {
 
     }
 
-    buildResult()
+    buildHtml()
     mercureSubscriber(poll.id, updateView)
 
 }
