@@ -43,10 +43,13 @@ class PollController extends AbstractController
             if($handle->pollContainResponse($poll, $formResponseId)){
                 $handle->persistVote($formResponseId);
                 $jsonPoll = $this->get('serializer')->serialize($poll, 'json', ['groups' => ['poll', 'poll_response']]);
-                $publisher(new Update($this->generateUrl("poll_vote", ["id" => $poll->getId()], 
+                try {
+                    $publisher(new Update($this->generateUrl("poll_vote", ["id" => $poll->getId()],
                         UrlGeneratorInterface::ABSOLUTE_URL), 
                         $jsonPoll
                 ));
+                } catch (\Throwable $e) {}
+
                 return new Response($jsonPoll, 200, ['Content-Type' => 'application/json']);
             }
         }

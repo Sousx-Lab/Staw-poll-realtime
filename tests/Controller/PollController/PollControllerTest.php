@@ -1,16 +1,17 @@
 <?php
 namespace App\Tests\Controller\PollController;
 
-use Nelmio\Alice\Parser\Chainable\JsonParser;
 use Liip\TestFixturesBundle\Test\FixturesTrait;
 use Symfony\Bundle\FrameworkBundle\KernelBrowser;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
+use Symfony\Component\HttpFoundation\Response;
 
 class PollControllerTest extends WebTestCase{
     
+
     protected KernelBrowser $client;
     use FixturesTrait;
-
+    
     protected function setUp(): KernelBrowser
     {
         return $this->client = static::createClient();
@@ -19,7 +20,7 @@ class PollControllerTest extends WebTestCase{
     public function test_WithBadPollIdRequest_ShouldReturnNotFoundException():void
     {
         $this->client->request('GET', "/vote/12345");
-        $this->assertResponseStatusCodeSame(404);
+        $this->assertResponseStatusCodeSame(Response::HTTP_NOT_FOUND);
         $this->assertRegExp("/Aucun Sondage n'a été trouvé !/", $this->client->getResponse()->getContent());
     }
 
@@ -27,7 +28,7 @@ class PollControllerTest extends WebTestCase{
     {
         $this->loadFixtureFiles([dirname(__DIR__ , 2). '/Repository/PollRepositoryFixtures.yaml']);
         $this->client->request('GET', '/vote/a53492b0-0388-472d-9c5e-5d7043e32b5d');
-        $this->assertResponseIsSuccessful();
+        $this->assertResponseStatusCodeSame(Response::HTTP_OK);
         $this->assertRegExp("/Poll_title_test_1/", $this->client->getResponse()->getContent());
     }
 
@@ -39,7 +40,7 @@ class PollControllerTest extends WebTestCase{
             'token'     => ''
         ]);
 
-        $this->assertSame(400, $this->client->getResponse()->getStatusCode());
+        $this->assertResponseStatusCodeSame(Response::HTTP_BAD_REQUEST);
     }
 
     public function test_WhitBadCsrfTokenRequest_ShouldReturnBadRequestException():void
@@ -51,7 +52,7 @@ class PollControllerTest extends WebTestCase{
             'poll_responses' => '2469fcd5-0a5c-449f-a0d5-a1e4b2ff4a9e',
             'token'     => '123456789',
         ]);
-        $this->assertSame(400, $this->client->getResponse()->getStatusCode());
+        $this->assertResponseStatusCodeSame(Response::HTTP_BAD_REQUEST);
     }
 
     public function test_WhitGoodCsrfTokenRequest_ShouldReturnSuccessfulJsonResponse():void
@@ -63,7 +64,7 @@ class PollControllerTest extends WebTestCase{
             'poll_responses' => "2469fcd5-0a5c-449f-a0d5-a1e4b2ff4a9e",
             'token'          => $csrfToken->getValue(),
         ]);
-
+        $this->assertResponseStatusCodeSame(Response::HTTP_OK);
         $this->assertJson($this->client->getResponse()->getContent());
     }
     

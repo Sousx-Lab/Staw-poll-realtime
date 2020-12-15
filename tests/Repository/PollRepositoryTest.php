@@ -6,7 +6,7 @@ use App\Repository\PollRepository;
 use Liip\TestFixturesBundle\Test\FixturesTrait;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
-class PollRepositoryRest extends KernelTestCase {
+class PollRepositoryTest extends KernelTestCase {
 
     use FixturesTrait;
 
