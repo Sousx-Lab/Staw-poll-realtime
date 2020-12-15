@@ -6,6 +6,7 @@ use App\Entity\Poll;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 
@@ -19,10 +20,10 @@ class PollType extends AbstractType
                 'entry_type'     => PollResponseType::class,
                 'required'       => false,
                 'empty_data'     => null,
-                'allow_add'      => true,
                 'allow_delete'   => true,
+                'allow_add'      => true,
                 'delete_empty'   => true,
-                'by_reference'   => false
+                'by_reference'   => false,
             ]);
     }
 
@@ -30,6 +31,7 @@ class PollType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Poll::class,
+
         ]);
     }
 }

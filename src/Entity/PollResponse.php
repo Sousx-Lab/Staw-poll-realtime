@@ -24,8 +24,8 @@ class PollResponse
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Assert\NotBlank
-     * @Assert\Length(min=2, minMessage="Au moin 2 caractère", max=50, maxMessage="Veuillez reformuler votre réponse, 50 caractère maximum")
+     * @Assert\Length(min=2, minMessage="Veuillez reformulez vos réponses , {{ limit }} caractères minimum", 
+     *                max=50, maxMessage="Veuillez reformulez vos réponses, {{ limit }} caractères maximum")
      * @Groups("poll_response")
      */
     private $content;
@@ -54,6 +54,12 @@ class PollResponse
         return $this->id;
     }
 
+    public function setId(string $id): self
+    {
+        $this->id = $id;
+        return $this;
+    }
+    
     public function getContent(): ?string
     {
         return $this->content;

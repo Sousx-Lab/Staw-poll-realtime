@@ -26,8 +26,8 @@ class PollRepository extends ServiceEntityRepository
     public function findOneByIdJoinedResponse(string $pollId): ?Poll
     {
         return $this->createQueryBuilder('p')
-            ->addSelect('p, r')
-            ->innerJoin('p.pollResponse', 'r')
+            ->addSelect('r')
+            ->LeftJoin('p.pollResponse', 'r')
             ->where('p.id = :id')
             ->setParameter('id', $pollId)
             ->getQuery()

@@ -1,10 +1,18 @@
 <div class="mt-4">
-	{{ form_start(form) }}
+	{{ form_start(form)}}
+	
 	<div class="form-group row">
 		<div class="col-sm-6 mt-4">
+			{% for error in form.vars.errors %}
+			  <div class="alert alert-danger" role="alert">
+  					{{error.message}}
+			 </div>
+			{% endfor %}
+
 			{{ form_label(form.title, (form.title.vars.required ? '* ': '') ~ 'Question du sondage', {'attr': {'class': 'col-sm-2 col-form-label'}}) }}
+
 			{{ form_widget(form.title,
-                {'attr': {'autofocus':'true', 'class': 'form-control' ~ (form.title.vars.valid ? ' ' : ' is-invalid'), 
+                {'attr': {'autofocus':'true', 'minlength': '2' ,'class': 'form-control' ~ (form.title.vars.valid ? ' ' : ' is-invalid'), 
                 'placeholder': 'Dans la trilogie Matrix , lequel est votre préféré ?'}}) }}
 			{% if  true != form.title.vars.valid %}
 				{% for error in form.title.vars.errors %}
@@ -14,56 +22,36 @@
 		</div>
 	</div>
 	{% set response = form.pollResponse.vars.prototype %}
-	<div id="prototype" 
-				data-label="{{ form_label (response.content, 'Réponse :')|e}}" 
-					data-input="{{ form_widget (response.content, {'attr' : {class: 'form-control' ~ (form.pollResponse.vars.valid ? '': ' is-invalid') }})|e }}" 
-			>
+	<div id="prototype" data-label="{{ form_label (response.content, 'Réponse :')|e}}" 
+		data-input="{{ form_widget (response.content, {'attr' :  {minlength: '2', class: 'form-control'}})|e }}">
 	</div>
 <div id="response-item">
-	<div class="form-group row" id="1">
+	{% set placeholder = "" %}
+	{% for key in 0..2 %}
+	<div class="form-group row" id="{{key + 1 }}">
 		<div class="col-sm-6">
-			<label for="poll_pollResponse_1_content">Réponse : 1</label>
+			<label for="poll_pollResponse_{{key}}_content">Réponse : {{ key + 1 }}</label>
 			<div class="input-group">
-				<input type="text" id="poll_pollResponse_1_content" name="poll[pollResponse][1][content]" class="form-control" placeholder="Matrix">
-				{# <div class="input-group-append">
-					<button type="button" class="btn btn-danger" name="remove_field">-</button>
-				</div> #}
+				<input type="text" id="poll_pollResponse_{{key}}_content" name="poll[pollResponse][{{key}}][content]" 
+				
+				class="form-control {{form.pollResponse[key].content.vars.valid is defined 
+				and form.pollResponse[key].content.vars.valid == false ? ' is-invalid' : ''}}"
+				placeholder="{{ key == 0 ? "Matrix" : key == 1 ? "Matrix  Reloaded" : key == 2 ? "Matrix Revolutions" }}" 
+				value="{{form.pollResponse[key].content.vars.value is defined ? form.pollResponse[key].content.vars.value : ''}}">
 			</div>
 		</div>
 	</div>
-	<div class="form-group row" id="2">
-		<div class="col-sm-6">
-			<label for="poll_pollResponse_2_content">Réponse : 2</label>
-			<div class="input-group">
-				<input type="text" id="poll_pollResponse_2_content" name="poll[pollResponse][2][content]" class="form-control" placeholder="Matrix Reload">
-				{# <div class="input-group-append">
-					<button type="button" class="btn btn-danger" name="remove_field">-</button>
-				</div> #}
-			</div>
-		</div>
-	</div>
-	<div class="form-group row" id="3">
-		<div class="col-sm-6">
-			<label for="poll_pollResponse_3_content">Réponse : 3</label>
-			<div class="input-group">
-				<input type="text" id="poll_pollResponse_3_content" name="poll[pollResponse][3][content]" class="form-control" placeholder="Matrix Revoltion">
-				{# <div class="input-group-append">
-					<button type="button" class="btn btn-danger" name="remove_field">-</button>
-				</div> #}
-			</div>
-		</div>
-	</div>
+{% endfor %}
 </div>
-<div class="row mt-2">
-	<div class="col-lg-6">
-		<button type="submit" class="btn btn-success">Créer le sondage</button>
-		<button type="button" class="btn btn-info" data-collection-holder-class="input-group" name="add_field">Ajouter un champ
-			<strong>+</strong>
-		</button>
-		<button type="reset" class="btn btn-danger float-right">Reset</button>
-		<button type="button" class="btn btn-danger float-right" name="remove_field">Supprimer un champ</button>
+	<div class="row mt-2">
+		<div class="col-lg-6">
+			<button type="submit" class="btn btn-success">Créer le sondage</button>
+			<button type="button" class="btn btn-info" data-collection-holder-class="input-group" name="add_field">Ajouter un champ
+				<strong>+</strong>
+			</button>
+			<button type="reset" class="btn btn-danger float-right">Reset</button>
+			<button type="button" class="btn btn-danger float-right" name="remove_field">Supprimer un champ</button>
+		</div>
 	</div>
-</div>
-
-	{{ form_widget(form._token) }}
-	{{ form_end(form, {'render_rest': false}) }}</div>
+{{ form_widget(form._token) }}
+{{ form_end(form, {'render_rest': false}) }}

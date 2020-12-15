@@ -1,0 +1,22 @@
+App\Entity\Poll:
+    poll_1:
+      id: "a53492b0-0388-472d-9c5e-5d7043e32b5d"
+      title: Poll_title_test_1
+      addPollResponse: '@pollResponse_1'
+
+App\Entity\PollResponse:
+  pollResponse_1:
+      id: "2469fcd5-0a5c-449f-a0d5-a1e4b2ff4a9e"
+      content: Response test1>
+      poll: '@poll_1'
+  pollResponse_2:
+      id: "081ebc75-1db7-485e-8ab3-cefa97c1939f"
+      content: Response test2>
+      poll: '@poll_1'
+  pollResponse_3:
+      id: "652cf636-37a7-4984-a5e6-e9a78cf5a19c"
+      content: Response test3>
+      poll: '@poll_1'
+      
+
+

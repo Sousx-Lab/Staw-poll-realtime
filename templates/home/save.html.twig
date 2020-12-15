@@ -55,3 +55,23 @@
 				data-input="{{ form_widget (response, {'attr' : {class: 'form-control' ~ (form.pollResponse.vars.valid ? '':  ' is-invalid') }})|e }}"
 				>
 			</ul>
+
+<div class="form-group row" id="{{key + 1 }}">
+		<div class="col-sm-6">
+			<label for="poll_pollResponse_{{key}}_content">Réponse : {{ key + 1 }}</label>
+			<div class="input-group">
+				<input type="text" id="poll_pollResponse_{{key}}_content" name="poll[pollResponse][{{key}}][content]" 
+				
+				class="form-control {{form.pollResponse[key].content.vars.valid is defined
+				and form.pollResponse[key].content.vars.valid == false ? ' is-invalid' : ''}}"
+				placeholder="{{ key == 0 ? "Matrix" : key == 1 ? "Matrix  Reloaded" : key == 2 ? "Matrix Revolutions" }}" 
+				value="{{form.pollResponse[key].content.vars.value is defined ? form.pollResponse[key].content.vars.value : ''}}">
+
+				{% if form.pollResponse[key].content.vars.errors is defined %}
+					{% for error in form.pollResponse[key].content.vars.errors %}
+						<div class="invalid-feedback">{{error.message}}</div>
+				{% endfor %}
+			{% endif %}
+			</div>
+		</div>
+	</div>

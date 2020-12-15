@@ -26,8 +26,8 @@ class Poll
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Assert\NotBlank
-     * @Assert\Length(min=2, minMessage="Au moin 2 caractère", max=100, maxMessage="Veuillez reformuler votre question, 100 caractère maximum")
+     * @Assert\NotBlank(message="Ce champ ne peut pas étres vide")
+     * @Assert\Length(min=2, minMessage="Veuillez reformulez votre question , {{ limit }} caractères minimum", max=100, maxMessage="Veuillez reformulez votre question, {{ limit }} caractères maximum")
      * @Groups("poll")
      */
     private string $title;
@@ -41,6 +41,7 @@ class Poll
     /**
      * @ORM\OneToMany(targetEntity=PollResponse::class, mappedBy="poll", orphanRemoval=true, cascade={"persist"})
      * @Groups("poll")
+     * @Assert\Valid()
      */
     private $pollResponse;
 
@@ -55,6 +56,12 @@ class Poll
     public function getId(): ?string
     {
         return $this->id;
+    }
+    
+    public function setId(string $id): self
+    {
+        $this->id = $id;
+        return $this;
     }
 
     public function getTitle(): ?string

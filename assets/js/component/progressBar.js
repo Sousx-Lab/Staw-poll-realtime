@@ -25,7 +25,7 @@ export function progressBar(poll) {
      * @param {object} poll
      */
     function updateView(poll){
-        document.getElementById(poll.id).innerText = `Totale vote ${totalVote}`
+        document.getElementById(poll.id).innerText = `Totale vote ${poll.totalVote()}`
 
         poll.pollResponse.forEach(e => {
             let score = Math.round(e.score * 100 / poll.totalVote())
