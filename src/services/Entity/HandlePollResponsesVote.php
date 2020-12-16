@@ -15,15 +15,11 @@ class HandlePollResponsesVote {
 
     public function pollContainResponse(Poll $poll, string $voteId): bool
     {
-        if(true !== $poll->getPollResponse()->exists(function($key, $value) use($voteId){
-            return $value->getId() === $voteId;}))
-        {
-            return false;
-        }
-        return true;
+        return $poll->getPollResponse()->exists(function($key, $value) use($voteId){
+            return $value->getId() === $voteId;}) ? true : false;
     }
 
-    public function persistVote($voteId) :void
+    public function persistVote(string $voteId) :void
     {
         $PollResponse = $this->em->getRepository(PollResponse::class)->find($voteId);
         $PollResponse->incrementScore();
