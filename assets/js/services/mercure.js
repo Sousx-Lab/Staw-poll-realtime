@@ -7,6 +7,7 @@ export function mercureSubscriber(pollId, callback){
     url.searchParams.append('topic', VOTE_URL + `${pollId}`);
     const eventSouce = new EventSource(url);
       eventSouce.onmessage = ({ data }) => {
+        console.log(data)
         Object.assign(poll, JSON.parse(data))
         callback(poll)
       }

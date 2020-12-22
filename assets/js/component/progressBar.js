@@ -4,7 +4,8 @@ export function progressBar(poll) {
     
     function buildHtml() {
         let vote = document.getElementById('vote')
-        vote.insertAdjacentHTML('beforeend', `<h5 id="${poll.id}" class="text-center">Totale vote ${poll.totalVote()}</h5>`) 
+        vote.insertAdjacentHTML('beforeend', `<h5 id="${poll.id}" class="text-center">Totale vote ${poll.totalVote()}</h5>`)
+        
         poll.pollResponse.forEach(e => {
             let score = Math.round(e.score * 100 / poll.totalVote())
             vote.insertAdjacentHTML('beforeend',
@@ -26,7 +27,7 @@ export function progressBar(poll) {
      */
     function updateView(poll){
         document.getElementById(poll.id).innerText = `Totale vote ${poll.totalVote()}`
-
+        
         poll.pollResponse.forEach(e => {
             let score = Math.round(e.score * 100 / poll.totalVote())
             let divId = document.getElementById(e.id)
@@ -36,7 +37,6 @@ export function progressBar(poll) {
         })
 
     }
-
     buildHtml()
     mercureSubscriber(poll.id, updateView)
 
