@@ -8,10 +8,12 @@ A free project to create poll, inspired by strawpoll.me
 ## Installing dependencies:
 
 #### Php
+
 ```bash
 composer install
 ```
 #### Javascript (yarn or npm)
+
 ```bash
  yarn install
 ```
