@@ -3,7 +3,7 @@
 A free project to create poll, inspired by strawpoll.me
 
 ## Screenshot
-
+[![starwpoll.jpg](https://i.postimg.cc/MGgyzzX5/starwpoll.jpg)](https://postimg.cc/R3Q3R57J)
 
 ## Installing dependencies:
 
