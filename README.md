@@ -4,7 +4,7 @@ A free project to create poll, inspired by strawpoll.me
 
 ## Screenshot
 
-[![straw-poll.jpg](https://i.postimg.cc/fb6cpSTC/straw-poll.jpg)](https://postimg.cc/Z9xvyRNv)
+[![starwpoll.jpg](https://i.postimg.cc/MGgyzzX5/starwpoll.jpg)](https://postimg.cc/R3Q3R57J)
 
 ## Installing dependencies:
 
